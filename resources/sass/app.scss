@@ -43,3 +43,12 @@ body{
 .card-header:hover{
     cursor: pointer;
 }
+
+.jumbotron.bg-secure{
+    background: #e18520;
+    border-radius: 0;
+}
+
+a.nav-link, nav-item a, a.dropdown-item {
+    font-size: 1rem;
+}
