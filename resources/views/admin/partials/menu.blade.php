@@ -20,19 +20,19 @@
    <a href="#filesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-file-upload"></i> Mis archivos</a>
    <ul class="collapse list-unstyled" id="filesSubmenu">
       <li>
-         <a href=">Agregar archivo</a>
+         <a href="{{ route('file.create') }}">Agregar archivo</a>
       </li>
       <li>
-         <a href=">Imágenes</a>
+         <a href="">Imágenes</a>
       </li>
       <li>
          <a href="">Videos</a>
       </li>
       <li>
-         <a href=">Audio</a>
+         <a href="">Audio</a>
       </li>
       <li>
-         <a href=">Documentos</a>
+         <a href="">Documentos</a>
       </li>
    </ul>
 </li>

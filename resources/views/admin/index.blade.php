@@ -1,4 +1,5 @@
 @extends('admin.layouts.app')
+@section('page', 'Panel administrativo')
 
 @section('content')
     <div class="panel panel-container container shadow-sm">
