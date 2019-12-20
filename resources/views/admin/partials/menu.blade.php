@@ -23,16 +23,16 @@
          <a href="{{ route('file.create') }}">Agregar archivo</a>
       </li>
       <li>
-         <a href="">Imágenes</a>
+         <a href="{{ route('file.images') }}">Imágenes</a>
       </li>
       <li>
-         <a href="">Videos</a>
+         <a href="{{ route('file.videos') }}">Videos</a>
       </li>
       <li>
-         <a href="">Audio</a>
+         <a href="{{ route('file.audios') }}">Audio</a>
       </li>
       <li>
-         <a href="">Documentos</a>
+         <a href="{{ route('file.documents') }}">Documentos</a>
       </li>
    </ul>
 </li>
