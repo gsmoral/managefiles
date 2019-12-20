@@ -41,19 +41,15 @@
                             <th scope="row">{{ $document->created_at->DiffForHumans() }}</th>
                             <th scope="row">
                                 @if($document->extension == 'pdf' || $document->extension == 'PDF')
-                                <a class="btn btn-primary" style="width: 60%;" target="_blanck" href="{{ asset('storage') }}/{{ $folder }}/document/{{ $document->name }}.{{ $document->extension }}"><i class="fas fa-eye"></i> Ver</a>
+                                <a class="btn btn-primary" style="width: 70%;" target="_blanck" href="{{ asset('storage') }}/{{ $folder }}/document/{{ $document->name }}.{{ $document->extension }}"><i class="fas fa-eye"></i> Ver</a>
                                 @else
-                                <a class="btn btn-success" style="width: 60%;" target="_blanck" href="{{ asset('storage') }}/{{ $folder }}/document/{{ $document->name }}.{{ $document->extension }}"><i class="fas fa-download"></i> Descargar</a>
+                                <a class="btn btn-success" style="width: 70%;" target="_blanck" href="{{ asset('storage') }}/{{ $folder }}/document/{{ $document->name }}.{{ $document->extension }}"><i class="fas fa-download"></i> Descargar</a>
                                 @endif
                                 
                                 
                             </th>
                             <th scope="row">
-                                <form action="{{ route('file.destroy', $document->id) }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="_method" value="PATCH">
-                                    <button class="btn btn-danger" type="submit"><i class="fas fa-trash"></i> Eliminar</button>
-                                </form>
+                                <a class="btn btn-danger pull-right text-white" data-toggle="modal" data-target="#deleteModal" data-file-id={{ $document->id }}><i class="fas fa-trash"></i> Eliminar</a>
                             </th>
                         </tr>
                     @empty
@@ -73,5 +69,11 @@
    
 </div>
    
+<!-- Modal -->
+@include('admin.partials.modals.files')
 
+@endsection
+
+@section('scripts')
+    @include('admin.partials.js.deleteModal')
 @endsection

@@ -12,11 +12,7 @@
             <div class="col-sm-12 col-md-4 pb-4">
                 <audio src="{{ asset('storage') }}/{{ $folder }}/audio/{{ $audio->name }}.{{ $audio->extension }}" alt="{{ $audio->name }}" controls></audio>
 
-                <form action="{{ route('file.destroy', $audio->id) }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="_method" value="PATCH">
-                    <button class="btn btn-danger" type="submit"><i class="fas fa-trash"></i> Eliminar</button>
-                </form>
+                <a class="btn btn-danger pull-right text-white" data-toggle="modal" data-target="#deleteModal" data-file-id={{ $audio->id }}><i class="fas fa-trash"></i> Eliminar</a>
 
             </div>
         @empty
@@ -32,5 +28,11 @@
    
 </div>
    
+<!-- Modal -->
+@include('admin.partials.modals.files')
 
+@endsection
+
+@section('scripts')
+    @include('admin.partials.js.deleteModal')
 @endsection

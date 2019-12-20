@@ -15,11 +15,7 @@
                     <div class="card-body">
                         <a href="{{ asset('storage') }}/{{ $folder }}/image/{{ $image->name }}.{{ $image->extension }}" target="_blank" class="btn btn-primary"><i class="fas fa-eye"></i> Ver </a>
             
-                        <form action="{{ route('file.destroy', $image->id) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="_method" value="PATCH">
-                            <button class="btn btn-danger" type="submit"><i class="fas fa-trash"></i> Eliminar</button>
-                        </form>
+                        <a class="btn btn-danger pull-right text-white" data-toggle="modal" data-target="#deleteModal" data-file-id={{ $image->id }}><i class="fas fa-trash"></i> Eliminar</a>
                     </div>
                 </div>
             </div>
@@ -36,5 +32,11 @@
    
 </div>
    
+<!-- Modal -->
+@include('admin.partials.modals.files')
 
+@endsection
+
+@section('scripts')
+    @include('admin.partials.js.deleteModal')
 @endsection

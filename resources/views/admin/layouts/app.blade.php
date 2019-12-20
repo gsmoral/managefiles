@@ -83,7 +83,6 @@
 
             <script src="{{ asset('js/bootstrap.min.js')}}"></script>
 
-
             @yield('scripts') 
 
         </div>

@@ -90,9 +90,9 @@ class FilesController extends Controller
         return back()->with('info', ['success', 'El archivo se ha subido correctamente']);
     }
 
-    public function destroy($id){
+    public function destroy(Request $request){
 
-        $file = File::findOrFail($id);
+        $file = File::findOrFail($request->file_id);
 
         //dd($file);
 
