@@ -31,3 +31,20 @@ Route::get('archivos/documentos', 'FilesController@documents')->name('file.docum
 Route::post('archivos/subir', 'FilesController@store')->name('file.store');
 //Route::post('archivos/editar/{id}', 'FilesController@edit');
 Route::patch('archivos/eliminar/{id}', 'FilesController@destroy')->name('file.destroy');
+
+//Roles
+Route::get('roles', 'Admin\RolesController@index')->name('role.index');
+Route::get('roles/agregar', 'Admin\RolesController@create')->name('role.create');
+Route::patch('roles/agregar', 'Admin\RolesController@store')->name('role.store');
+Route::get('roles/{id}/editar', 'Admin\RolesController@edit')->name('role.edit');
+Route::get('roles/{id}/', 'Admin\RolesController@show')->name('role.show');
+Route::patch('roles/{id}/editar', 'Admin\RolesController@update')->name('role.update');
+Route::patch('roles/{id}/eliminar', 'Admin\RolesController@destroy')->name('role.destroy');
+
+//Permissions
+Route::get('permisos', 'Admin\PermissionsController@index')->name('permission.index');
+Route::get('permisos/agregar', 'Admin\PermissionsController@create')->name('permission.create');
+Route::patch('permisos/agregar', 'Admin\PermissionsController@store')->name('permission.store');
+Route::get('permisos/{id}/editar', 'Admin\PermissionsController@edit')->name('permission.edit');
+Route::patch('permisos/{id}/editar', 'Admin\PermissionsController@update')->name('permission.update');
+Route::patch('permisos/{id}/eliminar', 'Admin\PermissionsController@destroy')->name('permission.destroy');
