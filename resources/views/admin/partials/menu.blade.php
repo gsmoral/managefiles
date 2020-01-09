@@ -76,10 +76,10 @@
    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-users"></i> Usuarios</a>
    <ul class="collapse list-unstyled" id="pageSubmenu">
       <li>
-         <a href="">Ver todos</a>
+         <a href="{{ route('user.index') }}">Ver todos</a>
       </li>
       <li>
-         <a href="">Agregar usuario</a>
+         <a href="{{ route('user.create') }}">Agregar usuario</a>
       </li>
    </ul>
 </li>
