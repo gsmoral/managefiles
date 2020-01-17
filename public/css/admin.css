@@ -372,9 +372,3 @@ button.btn.btn-primary.file {
   font-size: 1rem;
 }
 
-/* Modal Center */
-
-.modalCenter{
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-}

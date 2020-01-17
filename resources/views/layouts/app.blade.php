@@ -79,6 +79,28 @@
 
    @yield('content')
 
+   @include('admin.partials.alert')
+   @include('admin.partials.error')
+
+   <div class="container">
+      <div class="alert alert-success" role="alert">
+         <span class="closebtn" onclick="this.parentElement.style.display='none';">x</span>
+         <strong>¡Éxito!</strong> Mensaje de la alerta
+      </div>
+   </div>
+
+   @if(Session::has('success'))
+      <div class="alert alert-success">
+         {{Session::get('success')}}
+      </div>
+   @endif
+ 
+
+   <script src="{{ asset('js/slim.min.js')}}"></script>
+   <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+   
+   @yield('scripts') 
+
    <div class="alert-home"></div>
 
    <footer class="container py-5">
