@@ -53,8 +53,9 @@ class SubscriptionController extends Controller
         //dd($subscription);
 
         Auth()->user()->newSubscription('main', $subscription)->create($paymentMethod);
-        //return back()->with('info', ['success', 'Ahora estás suscrito.']);
-        return "Suscripción creada!";
+        //return back()->with('info', ['success', 'Ahora estás suscrito. Saludos desde el contraodor']);
+        //return response(['status' => 'success']);
+
     }
 
     /**

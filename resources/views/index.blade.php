@@ -36,18 +36,10 @@
       Descubre todo el potencial que esta aplicación tiene para ti. Disponible 24/7.
    </div>
 
-   {{-- @if(session('info'))
-   <div class="container">
-      <div class="alert alert-{{ session('info')[0] }}" role="alert">
-         <span class="closebtn" onclick="this.parentElement.style.display='none';">x</span>
-         <strong>¡Éxito!</strong> {{ session('info')[1] }}
-      </div>
-   </div>
-   @endif --}}
-
    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <p class="lead subtitle-home">Compara los planes y escoge el que más se adapte a lo que necesitas.</p>
    </div>
+
 
    <!-- Plans -->
    <div class="container">
@@ -123,17 +115,36 @@
            <span aria-hidden="true">&times;</span>
          </button>
        </div>
+       <div class="container">
+         <div class="alert alert-danger stripe-error mt-3" role="alert" style="display:none;">
+            <span class="closebtn float-right" onclick="this.parentElement.style.display='none';">x</span>
+            <strong>Error al realizar el pago</strong>
+            <p id="mensaje-error-stripe">Intente de nuevo o pruebe con una targeta distinta</p>
+         </div>
+       </div>
        <div class="modal-body">
          <p id="parrafo"></p>
-         <input id="card-holder-name" type="text" class="form-control mb-3" placeholder="Titular de la tarjeta">
+         <input id="card-holder-name" type="text" class="form-control mb-3" placeholder="Titular de la tarjeta" required>
 
          <!-- Stripe Elements Placeholder -->
          <div id="card-element" class="form-control" ></div>
 
          {{-- <input type="hidden" name="planid" id="planid" value=""> --}}
        </div>
+       <div class="container stripe-ok" style="display:none;">
+         <div class="alert alert-success mt-3" role="alert">
+            <strong>Pago realizado con exito</strong>
+            <p>Suscripción creada correctamente</p>
+         </div>
+       </div>
+       
        <div class="modal-footer">
          <button type="button" class="btn btn-primary btn-lg btn-block" id="card-button" data-secret="{{ $intent->client_secret ?? 'not-exist' }}">Pagar </button>
+         <button type="button" class="btn btn-primary btn-lg btn-block stripe-spinner" style="display:none;" disabled>
+            <span class="spinner-border spinner-border-sm mr-2"></span>
+            Enviando datos...
+          </button>
+         <button type="button" class="btn btn-secondary btn-lg btn-block stripe-ok" data-dismiss="modal" style="display:none;">Cerrar</button>
        </div>
      </div>
    </div>
@@ -168,6 +179,10 @@
          const clientSecret = cardButton.dataset.secret;
 
          cardButton.addEventListener('click', async (e) => {
+
+            $('.stripe-spinner').show(); // Muestro botón spinner
+            $('#card-button').hide(); //Oculto boton Pagar
+
             const { setupIntent, error } = await stripe.confirmCardSetup(
                clientSecret, {
                      payment_method: {
@@ -176,27 +191,45 @@
                      }
                }
             );
-
+            
             if (error) {
                // Display "error.message" to the user...
-               alert("Algo va a mal " + error);
-               console.log('error', setupIntent.payment_method);
+               //console.log('error', setupIntent.payment_method);
+               //console.log(error.message);
+               $('.stripe-spinner').hide(); // Oculto botón spinner
+               $('#card-button').show(); // Muestro botón pagar
+               $("#mensaje-error-stripe").text(error.message);
+               $('.stripe-error').show(); // Muestro error
                
             } else {
                // The card has been verified successfully...
                console.log('handling', setupIntent.payment_method); //Es lo mismo que esto: handling pm_1G20dhK3tHzsVq0wcsvb8tQG
 
                // Hide modal and force close backdrop
-               $('#checkoutmodal').modal('hide');
-               $('.modal-backdrop').remove();         
+               //$('#checkoutmodal').modal('hide');
+               //$('.modal-backdrop').remove();         
 
                axios.post("{{ route('subscription.store')}}",{
                   payment_method: setupIntent.payment_method,
                   plan: planid
+               }).then((response) => {
+                  console.log(response.data.status);// Así se obtiene el estado de la transacción
+                  $('.stripe-spinner').hide();  // Oculto botón spinner
+                  $('.modal-body').hide();      // Oculto formulario stripe
+                  $('.stripe-ok').show();       // Muestro mensaje ok y botón cerrar
+                  $('#card-button').hide();     // Oculto botón pagar
+                  //window.location.href = "{{ route('dashboard') }}";
+
+               }).catch((error)=>{
+                  console.log("Error en catch");
+                  console.log(error);
+                  $('.stripe-spinner').hide();  // Oculto botón spinner
+                  $("#mensaje-error-stripe").text("Intente de nuevo o pruebe con una targeta distinta");
+                  $('.stripe-error').show(); // Muestro error
+                  $('.modal-body').hide();      // Oculto formulario stripe             
                });
 
-               //alert("It works!");
-               window.location = "/home";
+               
             } //end else
          });
          
