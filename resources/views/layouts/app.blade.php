@@ -52,16 +52,16 @@
                  <a href="{{ route('login') }}" class="btn btn-outline-primary">Ingresar</a>
                </li> 
               @else
-                  <!-- if(Auth::user()->hasRole('Suscriptor')) -->
+                  @if(Auth::user()->hasRole('Suscriptor|Admin'))
                      <li class="nav-item">
                         <a class="nav-link" style="color: #000;" href="{{ route('file.create') }}">Subir tus archivos</a>
                      </li>
-                  <!-- endif -->
-                  <!-- if(Auth::user()->hasRole('Admin')) -->
+                  @endif
+                  @if(Auth::user()->hasRole('Admin'))
                     <li class="nav-item">
                         <a class="nav-link" style="color: #000;" href="{{ route('dashboard') }}">Panel administrativo</a>
                      </li>
-                  <!-- endif -->
+                  @endif
                   <li>
                      <a href="{{ route('logout') }}" class="logout btn btn-outline-danger" 
                      onclick="event.preventDefault(); 

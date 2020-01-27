@@ -21,7 +21,7 @@ Route::view('/seguridad','secure')->name('secure');
 Auth::routes();
 
 //Admin
-Route::get('/home', 'HomeController@index')->name('dashboard');
+Route::get('/dashboard', 'HomeController@index')->name('dashboard')->middleware('role:Admin');
 
 //Files
 Route::get('archivos/subir', 'FilesController@create')->name('file.create');
@@ -61,10 +61,10 @@ Route::patch('usuarios/{id}/editar', 'Admin\UsersController@update')->name('user
 Route::patch('usuarios/{id}/eliminar', 'Admin\UsersController@destroy')->name('user.destroy');
 
 //Suscriptions
-Route::get('planes', 'SubscriptionController@indexAdmin')->name('plan.index');
-Route::get('plan/agregar', 'SubscriptionController@create')->name('plan.create');
-Route::patch('plan/agregar', 'SubscriptionController@storeAdmin')->name('plan.store');
-Route::get('plan/{id}/editar', 'SubscriptionController@edit')->name('plan.edit');
-Route::get('plan/{id}/', 'SubscriptionController@show')->name('plan.show');
-Route::patch('plan/{id}/editar', 'SubscriptionController@update')->name('plan.update');
-Route::patch('plan/{id}/eliminar', 'SubscriptionController@destroy')->name('plan.destroy');
+Route::get('planes', 'Admin\PlanController@index')->name('plan.index');
+Route::get('plan/agregar', 'Admin\PlanController@create')->name('plan.create');
+Route::patch('plan/agregar', 'Admin\PlanController@store')->name('plan.store');
+Route::get('plan/{id}/editar', 'Admin\PlanController@edit')->name('plan.edit');
+Route::get('plan/{id}/', 'Admin\PlanController@show')->name('plan.show');
+Route::patch('plan/{id}/editar', 'Admin\PlanController@update')->name('plan.update');
+Route::patch('plan/{id}/eliminar', 'Admin\PlanController@destroy')->name('plan.destroy');

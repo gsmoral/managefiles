@@ -31,13 +31,12 @@ class PermissionsTableSeeder extends Seeder
       Permission::create(['name' => 'role.show', 'description' => 'Ver detalles del rol']);
       Permission::create(['name' => 'role.destroy', 'description' => 'Eliminar un rol']);
 
-      /* //Subscriptions plans
-
+      //Subscriptions plans
       Permission::create(['name' => 'plan.index', 'description' => 'Mostrar todos los planes']);
       Permission::create(['name' => 'plan.create', 'description' => 'Crear un nuevo plan']);
       Permission::create(['name' => 'plan.edit', 'description' => 'Editar un plan']);
       Permission::create(['name' => 'plan.show', 'description' => 'Ver detalles del plan']);
-      Permission::create(['name' => 'plan.destroy', 'description' => 'Eliminar un plan']); */
+      Permission::create(['name' => 'plan.destroy', 'description' => 'Eliminar un plan']);
 
       $admin = Role::create(['name' => 'Admin']);
       $subscriber = Role::create(['name' => 'Suscriptor']);

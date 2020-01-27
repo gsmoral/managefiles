@@ -1,10 +1,10 @@
-<!-- if(Auth()->user()->hasRole('Admin')) -->
+@if(Auth()->user()->hasRole('Admin'))
 <li class="active">
    <a href="{{ route('dashboard') }}"><i class="fas fa-chart-line"></i> Panel</a>
 </li>
-<!-- endif -->
+@endif
 
-<!-- if(Auth()->user()->hasRole('Admin|Suscriptor')) -->
+@if(Auth()->user()->hasRole('Admin|Suscriptor'))
 <li>
    <a href="#profileSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-user-circle"></i> Mi perfil</a>
       <ul class="collapse list-unstyled" id="profileSubmenu">
@@ -44,9 +44,9 @@
 <li>
    <a href=""><i class="fas fa-file-invoice"></i> Facturas</a>
 </li>
-<!-- endif -->
+@endif
 
-<!-- if(Auth()->user()->hasRole('Admin')) -->
+@if(Auth()->user()->hasRole('Admin'))
 
 <li>
    <a href="#rolesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-unlock-alt"></i> Roles</a>
@@ -94,10 +94,10 @@
          <a href="{{ route('plan.create') }}">Agregar plan</a>
    </ul>
 </li>
-<!-- endif -->
+@endif
 
 <li>
-   <a href="mailto:hola@cafeycodigo.com"><i class="far fa-question-circle"></i> Soporte</a>
+   <a href="mailto:hola@managefiles.com"><i class="far fa-question-circle"></i> Soporte</a>
 </li>
     
 </ul>

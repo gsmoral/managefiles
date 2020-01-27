@@ -4,16 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
-use Spatie\Permission\Models\Role;
+use App\Plan;
 
-class UsersController extends Controller
+class PlanController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
         $this->middleware(['role:Admin']);
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +19,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('admin.users.index', compact('users'));
+        $plans = Plan::all();
+        return view('admin.plans.index', compact('plans'));
     }
 
     /**
@@ -32,8 +30,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        return view('admin.users.create', compact('roles'));
+        return view('admin.plans.create');
     }
 
     /**
@@ -44,18 +41,8 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //$user = User::create(request(['name', 'email', 'password', 'image']));
-
-        $user = new User();
-
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
-        $user->password = bcrypt($request->get('password'));
-        $user->save();
-
-        $user->roles()->sync($request->get('roles'));
-
-        return back()->with('info', ['success', 'Se ha creado el usuario']);
+        $plan = Plan::create($request->all());
+        return back()->with('info', ['success', 'El plan se ha creado correctamente']);
     }
 
     /**
@@ -66,8 +53,8 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('admin.users.show', compact('user'));
+        $plan = Plan::find($id);
+        return view('admin.plans.show', compact('plan'));
     }
 
     /**
@@ -78,9 +65,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        $roles = Role::get();
-        return view('admin.users.edit', compact('user', 'roles'));
+        $plan = Plan::find($id);
+        return view('admin.plans.edit', compact('plan'));
     }
 
     /**
@@ -92,11 +78,10 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->update($request->except('roles'));
-        $user->roles()->sync($request->get('roles'));
+        $plan = Plan::find($id);
+        $plan->update($request->all());
 
-        return back()->with('info', ['success', 'Se ha actualizado los datos del usuario']);
+        return back()->with('info', ['success', 'Se han actualizado los datos del plan']);
     }
 
     /**
@@ -107,8 +92,8 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id)->delete();
+        $plan = Plan::find($id)->delete();
 
-        return back()->with('info', ['success', 'Se ha eliminado el usuario']);
+        return back()->with('info', ['success', 'Se ha eliminado el plan']);
     }
 }
