@@ -88,11 +88,10 @@
    <a href="#PlansSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-unlock-alt"></i> Planes</a>
    <ul class="collapse list-unstyled" id="PlansSubmenu">
       <li>
-         <a href="">Ver todos</a>
+         <a href="{{ route('plan.index') }}">Ver todos</a>
       </li>
       <li>
-         <a href="">Agregar plan</a>
-      </li>
+         <a href="{{ route('plan.create') }}">Agregar plan</a>
    </ul>
 </li>
 <!-- endif -->

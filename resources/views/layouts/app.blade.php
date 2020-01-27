@@ -54,7 +54,7 @@
               @else
                   <!-- if(Auth::user()->hasRole('Suscriptor')) -->
                      <li class="nav-item">
-                        <a class="nav-link" style="color: #000;" href="">Subir tus archivos</a>
+                        <a class="nav-link" style="color: #000;" href="{{ route('file.create') }}">Subir tus archivos</a>
                      </li>
                   <!-- endif -->
                   <!-- if(Auth::user()->hasRole('Admin')) -->

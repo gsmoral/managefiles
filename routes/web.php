@@ -59,3 +59,12 @@ Route::get('usuarios/{id}/editar', 'Admin\UsersController@edit')->name('user.edi
 Route::get('usuarios/{id}/', 'Admin\UsersController@show')->name('user.show');
 Route::patch('usuarios/{id}/editar', 'Admin\UsersController@update')->name('user.update');
 Route::patch('usuarios/{id}/eliminar', 'Admin\UsersController@destroy')->name('user.destroy');
+
+//Suscriptions
+Route::get('planes', 'SubscriptionController@indexAdmin')->name('plan.index');
+Route::get('plan/agregar', 'SubscriptionController@create')->name('plan.create');
+Route::patch('plan/agregar', 'SubscriptionController@storeAdmin')->name('plan.store');
+Route::get('plan/{id}/editar', 'SubscriptionController@edit')->name('plan.edit');
+Route::get('plan/{id}/', 'SubscriptionController@show')->name('plan.show');
+Route::patch('plan/{id}/editar', 'SubscriptionController@update')->name('plan.update');
+Route::patch('plan/{id}/eliminar', 'SubscriptionController@destroy')->name('plan.destroy');

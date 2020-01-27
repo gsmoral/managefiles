@@ -11,15 +11,15 @@
                <h5 class="title-home pt-5 ml-5">Almacena tus archivos  <br> con más eficiencia y <b>seguridad</b></h5>
                <p class="subtitle-home pt-4 ml-5">Obtén el espacio que necesitas. <br>Sube tus archivos y accede a ellos <br> desde cualquier dispositivo cuando quieras.</p>
                @guest
-                  <a href="" class="btn btn-primary mt-4 ml-5">Pruébalo gratis 30 días</a>
-                  <p class="mt-2 ml-5">O bien, <a href="">cómpralo ya mismo</a></p>
-               @else
-                  <!-- if(Auth::user()->hasRole('Suscriptor|Admin')) -->
-                     <a href="" class="btn btn-danger mt-4 ml-5">Subir tus archivos</a>
-                  <!-- else -->
                   <a href="{{ route('register') }}" class="btn btn-primary mt-4 ml-5">Pruébalo gratis 30 días</a>
                   <p class="mt-2 ml-5">O bien, <a href="{{ route('login') }}">cómpralo ya mismo</a></p>
-                  <!-- endif -->
+               @else
+                  @if(Auth::user()->hasRole('Suscriptor|Admin'))
+                     <a href="{{ route('file.create') }}" class="btn btn-danger mt-4 ml-5">Subir tus archivos</a>
+                  @else
+                  <a href="{{ route('register') }}" class="btn btn-primary mt-4 ml-5">Pruébalo gratis 30 días</a>
+                  <p class="mt-2 ml-5">O bien, <a href="{{ route('login') }}">cómpralo ya mismo</a></p>
+                  @endif
                @endguest
 
             </div>
