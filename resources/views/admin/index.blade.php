@@ -7,7 +7,7 @@
             <div class="col-sm-6 col-md-3 col-lg-3 no-padding">
                 <div class="panel  panel-widget border-right">
                     <div class="row no-padding"><i class="dashboard d-red fas fa-archive"></i>
-                        <div class="large">96</div>
+                        <div class="large">{{ $allFiles->count() }}</div>
                         <div class="dashboard-small">Archivos</div>
                     </div>
                 </div>
@@ -15,7 +15,7 @@
             <div class="col-sm-6 col-md-3 col-lg-3 no-padding ">
                 <div class="panel panel-widget border-right">
                     <div class="row no-padding"><i class="dashboard d-red fas fa-file-upload"></i></em>
-                        <div class="large">103</div>
+                        <div class="large">{{ $recentFiles->count() }}</div>
                         <div class="dashboard-small">Archivos recientes</div>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
             <div class="col-sm-6 col-md-3 col-lg-3 no-padding">
                 <div class="panel  panel-widget border-right">
                     <div class="row no-padding"><i class="dashboard d-blue far fa-user-circle"></i>
-                        <div class="large">5</div>
+                        <div class="large">{{ $allUsers->count() }}</div>
                         <div class="dashboard-small">Usuarios</div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
             <div class="col-sm-6 col-md-3 col-lg-3 no-padding">
                 <div class="panel  panel-widget ">
                     <div class="row no-padding"><i class="dashboard d-blue far fa-id-badge"></i></em>
-                     <div class="large">3</div>
+                     <div class="large">{{ $recentUsers->count() }}</div>
                         <div class="dashboard-small">Usuarios recientes</div>
                     </div>
                 </div>
