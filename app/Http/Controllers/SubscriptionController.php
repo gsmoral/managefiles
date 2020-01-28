@@ -85,4 +85,30 @@ class SubscriptionController extends Controller
         Auth::user()->subscription(\request('plan_name'))->cancel();
         return redirect()->back()->with('info', ['success', 'La suscripción se ha cancelado']);
     }
+
+    /**
+     * Display a listing of the invoices.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function invoices()
+    {
+        $invoices = Auth::user()->invoices();
+        return view('admin.subscriptions.invoices', compact('invoices'));
+    }
+    /**
+     * Display a invoice details.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param $invoiceId
+     * @return \Illuminate\Http\Response
+     */
+    public function showInvoice(Request $request, $invoiceId)
+    {
+        return $request->user()->downloadInvoice($invoiceId, [
+            'vendor' => 'Manage Files',
+            'product' => 'Suscripción en la plataforma',
+        ]);
+    }
+
 }

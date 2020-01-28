@@ -42,7 +42,7 @@
 </li>
 
 <li>
-   <a href=""><i class="fas fa-file-invoice"></i> Facturas</a>
+   <a href="{{ route('invoices.index') }}"><i class="fas fa-file-invoice"></i> Facturas</a>
 </li>
 @endif
 
