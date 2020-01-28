@@ -68,3 +68,8 @@ Route::get('plan/{id}/editar', 'Admin\PlanController@edit')->name('plan.edit');
 Route::get('plan/{id}/', 'Admin\PlanController@show')->name('plan.show');
 Route::patch('plan/{id}/editar', 'Admin\PlanController@update')->name('plan.update');
 Route::patch('plan/{id}/eliminar', 'Admin\PlanController@destroy')->name('plan.destroy');
+
+//Subscriptions
+Route::get('mis-suscripciones', 'SubscriptionController@subscriptions')->name('subscriptions.index');
+Route::post('continuar', 'SubscriptionController@resume')->name('subscriptions.resume');
+Route::post('cancelar', 'SubscriptionController@cancel')->name('subscriptions.cancel');

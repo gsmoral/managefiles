@@ -38,7 +38,7 @@
 </li>
 
 <li>
-   <a href=""><i class="fas fa-fire"></i> Suscripciones</a>
+   <a href="{{ route('subscriptions.index') }}"><i class="fas fa-fire"></i> Suscripciones</a>
 </li>
 
 <li>

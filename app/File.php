@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     protected $fillable = [
-        'name', 'type', 'extension', 'user_id'
+        'name', 'type', 'extension', 'folder', 'user_id'
     ];
 
     public function user(){

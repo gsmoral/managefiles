@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Plan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Laravel\Cashier\Exceptions\IncompletePayment;
 use Stripe\Stripe;
 //use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,12 @@ class SubscriptionController extends Controller
         return view('index', compact('plans', 'intent'));
 
         //return view('index', compact('plans', 'intent'))->with('success', 'Mensaje de success');
+    }
+
+    public function subscriptions()
+    {
+        $subscriptions = Auth::user()->subscriptions;
+        return view('admin.subscriptions.index', compact('subscriptions'));
     }
 
     /**
@@ -59,5 +66,23 @@ class SubscriptionController extends Controller
         //return back()->with('info', ['success', 'Ahora estás suscrito. Saludos desde el contraodor']);
         //return response(['status' => 'success']);
 
+    }
+    public function resume()
+    {
+        $subscription = \request()->user()->subscription(\request('plan_name'));
+        //dd($subscription);
+        
+        if ($subscription->cancelled() && $subscription->onGracePeriod()){
+            \request()->user()->subscription(\request('plan_name'))->resume();
+            return back()->with('info', ['success', 'La suscripción continuará']);
+        }
+
+        return back();
+
+    }
+    public function cancel()
+    {
+        Auth::user()->subscription(\request('plan_name'))->cancel();
+        return redirect()->back()->with('info', ['success', 'La suscripción se ha cancelado']);
     }
 }
