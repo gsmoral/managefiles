@@ -80,4 +80,6 @@ Route::middleware('auth')->group(function () {
     Route::get('mis-facturas', 'SubscriptionController@invoices')->name('invoices.index');
     Route::get('mis-facturas/{invoice}', 'SubscriptionController@showInvoice')->name('invoices.show');
 
+    //Profile
+    Route::view('mi-perfil', 'admin.profile.index')->name('profile');
 });

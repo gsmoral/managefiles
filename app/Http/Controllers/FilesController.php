@@ -29,7 +29,7 @@ class FilesController extends Controller
             ->where('type', '=', 'image')
             ->get();
             
-        $folder = str_slug(Auth::user()->name . '-' . Auth::id());
+        $folder = $this->getUserFolder();
         return view('admin.files.type.images', compact('images', 'folder'));
     }
 
@@ -39,7 +39,7 @@ class FilesController extends Controller
             ->where('type', '=', 'video')
             ->get();
             
-        $folder = str_slug(Auth::user()->name . '-' . Auth::id());
+        $folder = $this->getUserFolder();
         return view('admin.files.type.videos', compact('videos', 'folder'));
     }
 
@@ -49,7 +49,7 @@ class FilesController extends Controller
             ->where('type', '=', 'audio')
             ->get();
             
-        $folder = str_slug(Auth::user()->name . '-' . Auth::id());
+        $folder = $this->getUserFolder();
         return view('admin.files.type.audios', compact('audios', 'folder'));
     }
 
@@ -66,16 +66,17 @@ class FilesController extends Controller
             ->get();
         }
         
-        $folder = str_slug(Auth::user()->name . '-' . Auth::id());
+        $folder = $this->getUserFolder();
         return view('admin.files.type.documents', compact('documents', 'folder'));
     }
 
     public function store(Request $request){
-        $max_size = (int)ini_get('upload_max_filesize') * 1000;
+        $max_size = (int)ini_get('upload_max_filesize') * 100000;
         $all_ext = implode(',', $this->allExtensions());
 
-        $this->validate(request(), [
-            'file.*' => 'required|file|mimes:' . $all_ext . '|max:' . $max_size
+        //dd($request);
+        $this->validate($request, [
+            'file' => 'required|file|mimes:' . $all_ext . '|max:' . $max_size
         ]);
 
         $uploadFile = new File();
@@ -139,7 +140,8 @@ class FilesController extends Controller
     }
 
     private function getUserFolder(){
-        $folder = Auth::user()->name . '-' . Auth::id();
+        //$folder = Auth::user()->name . '-' . Auth::id();
+        $folder = Auth::user()->username . '-' . Auth::id();
         return str_slug($folder);
     }
 }

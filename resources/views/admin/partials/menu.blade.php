@@ -9,7 +9,7 @@
    <a href="#profileSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-user-circle"></i> Mi perfil</a>
       <ul class="collapse list-unstyled" id="profileSubmenu">
          <li>
-            <a href="">Ver mi perfil</a>
+            <a href="{{ route('profile') }}">Ver mi perfil</a>
          </li>
          <li>
             <a href="#">Actualizar perfil</a>
