@@ -52,7 +52,7 @@
                  <a href="{{ route('login') }}" class="btn btn-outline-primary">Ingresar</a>
                </li> 
               @else
-                  @if(Auth::user()->hasRole('Suscriptor'))
+                  @if(Auth::user()->hasRole('Suscriptor|Admin'))
                      <li class="nav-item">
                         <a class="nav-link" style="color: #000;" href="{{ route('file.create') }}">Subir tus archivos</a>
                      </li>
@@ -73,7 +73,17 @@
       </nav>
    </header>
 
+   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+  </form>
+
    @yield('content')
+
+   
+   <script src="{{ asset('js/slim.min.js')}}"></script>
+   <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+   
+   @yield('scripts') 
 
    <div class="alert-home"></div>
 
